@@ -16,7 +16,6 @@
       parser:
         name: ansible.netcommon.pyats
     register: _vlan_result
-    when: ansible_network_os == 'ios'
   - debug: 
       var: _vlan_result
       verbosity: 2
