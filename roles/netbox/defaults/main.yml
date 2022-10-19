@@ -4,7 +4,7 @@
 net_netbox_url: https://192.168.1.200
 # On Netbox: User icon -> Profile -> API Tokens
 net_netbox_token: "db59d5f08ff66721c64bd181e2b23da2e48d2d87"
-net_site: 'aws'
+net_site: 'Paris'
 net_device_role: router
 
 device_id: 0
