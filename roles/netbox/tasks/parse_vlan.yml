@@ -3,21 +3,16 @@
 - name: PARSE VLAN INFORMATIONS
   block:
   - name: gather facts for L2 interface information
-    cisco.ios.ios_facts:
+    cisco.eos.eos_facts:
       gather_network_resources: 
         - "l2_interfaces"
+        - vlans
       gather_subset:
         - min
     register: _intf_result
     become: true
-  - name: capture and parse 'show vlan'
-    ansible.utils.cli_parse:
-      command: "show vlan"
-      parser:
-        name: ansible.netcommon.pyats
-    register: _vlan_result
   - debug: 
-      var: _vlan_result
+      var: _intf_result
       verbosity: 2
   tags: [parse_vlan]
 
