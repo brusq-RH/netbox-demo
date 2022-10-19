@@ -3,7 +3,7 @@
 - name: PARSE VLAN INFORMATIONS
   block:
   - name: gather facts for L2 interface information
-    cisco.eos.eos_facts:
+    arista.eos.eos_facts:
       gather_network_resources: 
         - "l2_interfaces"
         - vlans
