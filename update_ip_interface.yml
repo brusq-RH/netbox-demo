@@ -5,7 +5,7 @@
   gather_facts: false
 
   vars:
-    input:  "{{ data | from_yaml  " 
+    input:  "{{ data | from_yaml  }}" 
 
   tasks:
     - include_vars: main.yml
