@@ -14,32 +14,13 @@
       debug:
         msg: "{{ data }}" 
 
-
-
     - name: Debug Netbox data structure JSON
       debug:
-        msg: "{{ data | regex_replace("\'", "\"")  }}" 
-
-
-    - name: Debug Netbox data structure JSON
-      debug:
-        msg: "{{ data | regex_replace("\'", "\"") | to_json  }}" 
-
-
-
-    - name: Debug Netbox data structure JSON
-      debug:
-        msg: "{{ data | regex_replace("\'", "\"") | from_json  }}" 
+        msg: "{{ data | regex_replace("aaa", "bbb") }}" 
 
     - name: Debug Netbox data structure name
       debug:
         msg: "{{ input.name }}" 
-
-
-    - name: Print phone records
-      debug:
-        msg: "User {{ item.key }} is {{ item.value.name }}"
-      loop: "{{ lookup('dict', data) }}"
 
 
     - name: Merge provided configuration with device configuration
