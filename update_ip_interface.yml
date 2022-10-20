@@ -16,8 +16,15 @@
 
     - name: Debug Netbox data structure JSON
       debug:
-        msg: "{{ data | replace(\"'\", '"') }}" 
+        msg: "{{ data | replace(\"'\", '\"') }}" 
 
+
+    - name: Debug Netbox data structure JSON
+      debug:
+        msg: "{{ data | replace(\"'\", '\"') }} | to_json " 
+
+
+        
     - name: Debug Netbox data structure name
       debug:
         msg: "{{ input.name }}" 
