@@ -5,7 +5,7 @@
   gather_facts: false
 
   vars:
-    input: "{{ data | from_json }}"
+    input: "{{ data | to_json }}"
 
   tasks:
     - include_vars: main.yml
