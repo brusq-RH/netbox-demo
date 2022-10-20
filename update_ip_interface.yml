@@ -18,11 +18,6 @@
       debug:
         msg: "{{ input }}" 
 
-  - name: Print phone records
-    ansible.builtin.debug:
-      msg: "User {{ item.key }} is {{ item.value.name }} "
-    loop: "{{ lookup('ansible.builtin.dict', data) }}"
-
 
     - name: Merge provided configuration with device configuration
       cisco.ios.ios_interfaces:
