@@ -1,7 +1,7 @@
 ---
 
 - name: Update interface vlan configs, triggered by Netbox changes
-  hosts: rtr1
+  hosts: "{{ device }}" 
   gather_facts: false
   tasks:
     - include_vars: main.yml
