@@ -5,7 +5,7 @@
   gather_facts: false
 
   vars:
-    input: "{{ data | to_json }}"
+    input: "{{ data | to_nice_json }}"
 
   tasks:
     - include_vars: main.yml
@@ -18,9 +18,11 @@
       debug:
         msg: "{{ input }}" 
 
-    - name: Debug Netbox data structure
-      debug:
-        msg: "{{ input.name }}" 
+  - name: Print phone records
+    ansible.builtin.debug:
+      msg: "User {{ item.key }} is {{ item.value.name }} "
+    loop: "{{ lookup('ansible.builtin.dict', data) }}"
+
 
     - name: Merge provided configuration with device configuration
       cisco.ios.ios_interfaces:
