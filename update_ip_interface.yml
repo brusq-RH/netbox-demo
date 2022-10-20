@@ -5,7 +5,7 @@
   gather_facts: false
 
   vars:
-    input: "{{ data | to_nice_json }}"
+    input: "{{ data | to_json }}"
 
   tasks:
     - include_vars: main.yml
@@ -20,9 +20,9 @@
       debug:
         msg: "{{ data | to_json  }}" 
 
-    - name: Debug Netbox data structure NICE
+    - name: Debug Netbox data structure name
       debug:
-        msg: "{{ data | to_nice_json  }}" 
+        msg: "{{ input.name }}" 
 
 
     - name: Print phone records
