@@ -5,7 +5,7 @@
   gather_facts: false
 
   vars:
-    input:  "{{ data | replace(\"'\", '\"') }}  " 
+    input:  "{{ data | replace(\"'\", '\"') }} | to_json | from_json  " 
 
   tasks:
     - include_vars: main.yml
@@ -23,7 +23,9 @@
       debug:
         msg: "{{ data | replace(\"'\", '\"') }} | to_json | from_json " 
 
-
+    - name: Debug Netbox data structure
+      debug:
+        msg: "{{ input.name }}" 
 
     - name: Merge provided configuration with device configuration
       cisco.ios.ios_interfaces:
