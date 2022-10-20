@@ -14,6 +14,17 @@
       debug:
         msg: "{{ data }}" 
 
+
+
+    - name: Debug Netbox data structure JSON
+      debug:
+        msg: "{{ data | to_json  }}" 
+
+    - name: Debug Netbox data structure NICE
+      debug:
+        msg: "{{ data | to_nice_json  }}" 
+
+
     - name: Print phone records
       debug:
         msg: "User {{ item.key }} is {{ item.value.name }}"
