@@ -5,7 +5,7 @@
   gather_facts: false
 
   vars:
-    input: "{{ data| from_json }}"
+    input: "{{ data | from_json }}"
 
   tasks:
     - include_vars: main.yml
@@ -21,7 +21,7 @@
     - name: Debug Netbox data structure
       debug:
         msg: "{{ input.name }}" 
-        
+
     - name: Merge provided configuration with device configuration
       cisco.ios.ios_interfaces:
         config:
