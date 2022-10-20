@@ -14,7 +14,7 @@
     - name: Merge provided configuration with device configuration
       cisco.ios.ios_interfaces:
         config:
-        - name: "{{ data['name'] }}"
+        - name: "{{ data.name }}"
           description: Configured and Merged by Ansible Network
           mtu: 2800
           enabled: false
