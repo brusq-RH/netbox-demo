@@ -14,9 +14,10 @@
       debug:
         msg: "{{ data }}" 
 
-    - name: Debug Netbox data structure
+    - name: Print phone records
       debug:
-        msg: "{{ input }}" 
+        msg: "User {{ item.key }} is {{ item.value.name }}"
+      loop: "{{ lookup('dict', data) }}"
 
 
     - name: Merge provided configuration with device configuration
