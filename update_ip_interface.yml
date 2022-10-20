@@ -6,6 +6,7 @@
 
   vars:
     input:  "{{ data | replace(\"'\", '\"') }} | to_json " 
+    json_ok: "{"name":"John", "age":30, "car":null}""
 
   tasks:
     - include_vars: main.yml
@@ -14,6 +15,14 @@
       debug:
         msg: "{{ data }}" 
 
+    - name: Debug Netbox data structure
+      debug:
+        msg: "{{ json_ok }}" 
+
+    - name: Debug Netbox data structure
+      debug:
+        msg: "{{ json_ok.name }}" 
+        
     - name: Debug Netbox data structure JSON
       debug:
         msg: "{{ data | replace(\"'\", '\"') }}" 
