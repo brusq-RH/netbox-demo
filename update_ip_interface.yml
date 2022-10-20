@@ -14,6 +14,15 @@
       debug:
         msg: "{{ data }}" 
 
+    - name: show initial state
+      debug:
+        var: "{{ item.name }}"
+      with_dict: "{{ data }}"
+
+
+    - name: Debug Netbox data structure
+      debug:
+        msg: "{{ var }}" 
 
     - name: Debug Netbox data structure JSON
       debug:
