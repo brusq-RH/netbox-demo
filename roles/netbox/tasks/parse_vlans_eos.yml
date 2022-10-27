@@ -44,5 +44,4 @@
     loop_control:
       label: "{{ item.name }}"
     when: item.access is defined
-  when: inventory_hostname in groups['switch']
   tags: [netbox]
