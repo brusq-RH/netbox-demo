@@ -17,6 +17,23 @@
 
 - name: NETBOX block
   block:
+
+
+  - name: push device inventory data to netbox
+    netbox.netbox.netbox_device:
+      netbox_url: "{{ net_netbox_url }}"
+      netbox_token: "{{ net_netbox_token }}"
+      validate_certs: no
+      data:
+        name: "rtr4"
+        site: "paris"
+        serial: "xxxxx"
+        device_type: "junos"
+        device_role: "router}"
+        comments: "added by Ansible"
+
+
+
   - name: push device inventory data to netbox
     netbox.netbox.netbox_device:
       netbox_url: "{{ net_netbox_url }}"
