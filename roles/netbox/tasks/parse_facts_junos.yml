@@ -3,7 +3,7 @@
 - name: JUNOS block
   block:
   - name: JUNOS facts
-    arista.eos.eos_facts:
+    junipernetworks.junos.junos_facts:
       gather_subset:
         - hardware
       gather_network_resources:
