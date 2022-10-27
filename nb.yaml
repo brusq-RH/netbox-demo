@@ -3,3 +3,5 @@ api_endpoint: https://192.168.1.200
 validate_certs: False
 config_context: False
 token: "db59d5f08ff66721c64bd181e2b23da2e48d2d87"
+group_by:
+  - device_roles
