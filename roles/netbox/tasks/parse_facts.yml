@@ -59,8 +59,6 @@
       netbox_token: "{{ net_netbox_token }}"
       validate_certs: no
       data:
-        region: "France" 
-        name: "{{ inventory_hostname }}"
         site: "{{ net_site }}"
         serial: "{{ _facts.ansible_facts.ansible_net_serialnum | default(omit) }}"
         device_type: "{{ _facts.ansible_facts.ansible_net_system | default('unknown') }}"
