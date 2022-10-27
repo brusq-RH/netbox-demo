@@ -1,5 +1,5 @@
 
-plugin: plugins/inventory/netbox_inventory.py
+plugin: plugins/inventory/netbox_inventory
 api_endpoint: hhttps://192.168.1.200
 validate_certs: False
 config_context: False
