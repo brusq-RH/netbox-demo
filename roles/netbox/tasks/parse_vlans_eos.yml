@@ -24,7 +24,7 @@
       netbox_token: "{{ net_netbox_token }}"
       validate_certs: no
       data:
-        name: "{{ item.value.name }}"
+        name: "{{ item.name }}"
         vid: "{{ item.vlan_id }}"
         site: "{{ net_site }}"
     loop: "{{ _intf_result.ansible_facts.ansible_network_resources.vlans }}"
