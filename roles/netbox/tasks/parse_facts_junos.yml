@@ -7,7 +7,12 @@
       gather_subset:
         - hardware
       gather_network_resources:
-        - all
+        - "interfaces"
+        - "l2_interfaces"
+        - "l3_interfaces"
+        - "acl_interfaces"
+        - "static_routes" 
+        - "acls" 
     register: _junos_facts
     become: true    
   - debug:
