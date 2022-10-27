@@ -9,7 +9,6 @@
       gather_network_resources:
         - all
     register: _junos_facts
-    become: true
   - debug:
       var: _junos_facts
       verbosity: 2
@@ -35,3 +34,6 @@
           device_version: "{{ _facts.ansible_facts.ansible_net_version | default('unknown') }}"
         comments: "added by Ansible"
   tags: netbox
+
+
+
