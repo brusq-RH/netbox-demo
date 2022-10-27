@@ -65,5 +65,7 @@
         device_type: "{{ _facts.ansible_facts.ansible_net_system | default('unknown') }}"
         device_role: "{{ net_device_role }}"
         local_context_data: "{{ _facts.ansible_facts.ansible_network_resources }}"
+        device_model: "{{ _facts.ansible_facts.ansible_net_model | default('unknown') }}"
+        device_version: "{{ _facts.ansible_facts.ansible_net_version | default('unknown') }}"
         comments: "added by Ansible"
   tags: netbox
