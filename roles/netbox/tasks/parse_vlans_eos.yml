@@ -25,11 +25,10 @@
       validate_certs: no
       data:
         name: "{{ item.value.name }}"
-        vid: "{{ item.key }}"
+        vid: "{{ item.vlan_id }}"
         site: "{{ net_site }}"
-    loop: "{{ _vlan_result.parsed.vlans | dict2items }}"
-    loop_control:
-      label: "{{ item.key }} ==> {{ item.value.name }}"
+    loop: "{{ _vlan_result.parsed.vlans }}"
+
   - name: push intf access VLAN to netbox
     netbox.netbox.netbox_device_interface:
       netbox_url: "{{ net_netbox_url }}"
