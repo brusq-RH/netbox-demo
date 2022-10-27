@@ -17,7 +17,7 @@
       _facts: "{{ _junos_facts }}"
 
 - name: NETBOX block
-
+  block:
   - name: push device inventory data to netbox
     netbox.netbox.netbox_device:
       netbox_url: "{{ net_netbox_url }}"
