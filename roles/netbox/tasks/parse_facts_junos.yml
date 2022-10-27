@@ -9,6 +9,7 @@
       gather_network_resources:
         - all
     register: _junos_facts
+    become: true    
   - debug:
       var: _junos_facts
       verbosity: 2
@@ -17,22 +18,6 @@
 
 - name: NETBOX block
   block:
-
-
-  - name: push device inventory data to netbox
-    netbox.netbox.netbox_device:
-      netbox_url: "{{ net_netbox_url }}"
-      netbox_token: "{{ net_netbox_token }}"
-      validate_certs: no
-      data:
-        name: "rtr4"
-        site: "paris"
-        serial: "xxxxx"
-        device_type: "junos"
-        device_role: "router}"
-        comments: "added by Ansible"
-
-
 
   - name: push device inventory data to netbox
     netbox.netbox.netbox_device:
@@ -50,6 +35,7 @@
           device_model: "{{ _facts.ansible_facts.ansible_net_model | default('unknown') }}"
           device_version: "{{ _facts.ansible_facts.ansible_net_version | default('unknown') }}"
         comments: "added by Ansible"
+    delegate_to: localhost
   tags: netbox
 
 
