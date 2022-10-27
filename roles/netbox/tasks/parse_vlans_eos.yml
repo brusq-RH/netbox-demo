@@ -12,7 +12,7 @@
     register: _intf_result
     become: true
   - debug: 
-      var: _intf_result
+      var: _intf_result.parsed
       verbosity: 2
   tags: [parse_vlan]
 
@@ -27,7 +27,7 @@
         name: "{{ item.value.name }}"
         vid: "{{ item.vlan_id }}"
         site: "{{ net_site }}"
-    loop: "{{ _vlan_result.parsed.vlans }}"
+    loop: "{{ _intf_result.parsed.vlans }}"
 
   - name: push intf access VLAN to netbox
     netbox.netbox.netbox_device_interface:
