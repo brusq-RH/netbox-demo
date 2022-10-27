@@ -25,7 +25,7 @@
       validate_certs: no
       data: 
         model: "{{ _facts.ansible_facts.ansible_net_system | default('unknown') }}"
-        manufacturer: "junos"
+        manufacturer: "juniper"
         slug: "{{ _facts.ansible_facts.ansible_net_system | default('unknown') }}"
     throttle: 1
   - name: push device inventory data to netbox
