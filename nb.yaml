@@ -5,3 +5,4 @@ config_context: False
 token: "db59d5f08ff66721c64bd181e2b23da2e48d2d87"
 group_by:
   - device_roles
+  - device_types
