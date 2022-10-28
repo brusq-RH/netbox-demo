@@ -11,9 +11,6 @@
   - debug:
       var: _int_result.parsed
       verbosity: 2
-  tags: [parse_intf]
-
-
 
   - name: EOS facts
     arista.eos.eos_facts:
