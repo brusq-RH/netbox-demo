@@ -37,7 +37,7 @@
 
 
   - debug:
-      msg: "{{ item.value.duplex }}" 
+      msg: "{{ item.value.duplex | default('unknown')  }}" 
       verbosity: 2
     with_dict: "{{ _eos_facts.ansible_facts.ansible_net_interfaces }}"
 
