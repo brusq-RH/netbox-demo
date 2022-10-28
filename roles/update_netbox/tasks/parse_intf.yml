@@ -31,9 +31,19 @@
     with_dict: "{{ _eos_facts.ansible_facts.ansible_net_interfaces }}"
 
   - debug:
-      var: item.value.mtu
+      msg: "{{ item.value.bandwidth / 1000 }}"
       verbosity: 2
     with_dict: "{{ _eos_facts.ansible_facts.ansible_net_interfaces }}"
+
+
+
+
+  - debug:
+      var: item.value.duplex
+      verbosity: 2
+    with_dict: "{{ _eos_facts.ansible_facts.ansible_net_interfaces }}"
+
+
 
   - set_fact:
       _facts: "{{ _eos_facts }}"
