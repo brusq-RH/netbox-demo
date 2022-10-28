@@ -29,7 +29,7 @@
     - name: Merge provided configuration with device configuration
       arista.eos.eos_interfaces:
         config:
-          name: "{{ netbox_interface[0].name }}"
+        - name: "{{ netbox_interface[0].name }}"
           description: Configured and Merged by Ansible Network
           enabled: "{{ netbox_interface[0].enabled }}"
           mtu: "{{ netbox_interface[0].mtu }}"
