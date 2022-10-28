@@ -3,24 +3,38 @@
 - name: Update interface vlan configs, triggered by Netbox changes
   hosts: "{{ device }}"
   gather_facts: false
+
+
   tasks:
     - include_vars: main.yml
 
     - name: Debug Netbox data structure
       debug:
-        msg: "{{ data }}" 
+        msg: "{{ interface_id }}" 
 
-    - name: Debug Netbox relevant variables
+
+    - name: set fact
+      set_fact:
+        netbox_interface:  "{{ query('netbox.netbox.nb_lookup', 'interfaces', api_filter='id=' ~ interface_id,
+                      api_endpoint='http://192.168.1.200/',
+                      token='db59d5f08ff66721c64bd181e2b23da2e48d2d87', validate_certs=false) }}"
+    - name: debug
       debug:
-        msg: "{{ device }}, {{ interface }}, {{ vlan_id }}, {{ vlan_name }}, {{ event }}, {{ timestamp }}, {{ data }}" 
+        msg: "{{ netbox_interface }}"
 
-    - name: Cisco IOS update VLAN to l2 interface on {{ device }}
-      cisco.ios.ios_l2_interfaces:
+    - name: debug
+      debug:
+        msg:  "{{ netbox_interface[0].mtu }}, {{ netbox_interface[0].enabled }}, {{ netbox_interface[0].name }}"
+
+    - name: Merge provided configuration with device configuration.
+      arista.eos.eos_l2_interfaces:
         config:
-          - name: "{{ interface }}"
-            mode: access
-            access:
-              vlan: "{{ vlan_id }}"
+        - name: Ethernet1
+          mode: trunk
+          trunk:
+            native_vlan: 10
+        - name: Ethernet2
+          mode: access
+          access:
+            vlan: 30
         state: merged
-      become: true
-

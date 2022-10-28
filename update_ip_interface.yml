@@ -34,3 +34,13 @@
           enabled: "{{ netbox_interface[0].enabled }}"
           mtu: "{{ netbox_interface[0].mtu }}"
           enabled: true
+
+
+    - name: Merge provided configuration with device configuration.
+      arista.eos.eos_l2_interfaces:
+        config:
+        - name: "{{ netbox_interface[0].name }}"
+          mode: access
+          access:
+            vlan: "{{ netbox_interface[0].untagged_vlan.vid }}"
+        state: replaced
