@@ -36,7 +36,7 @@
     with_dict: "{{ _eos_facts.ansible_facts.ansible_net_interfaces }}"
 
 
-  - debug:
+  - set_fact:
       msg: "{{ item.value.duplex | default('unknown')  }}" 
       verbosity: 2
     with_dict: "{{ _eos_facts.ansible_facts.ansible_net_interfaces }}"
@@ -45,6 +45,7 @@
   - debug:
       msg: "{% if item.value.duplex == 'duplexFull' %}Full{% else %}UNKNOWN{% endif %}" 
       verbosity: 2
+    when: item.value.duplex  is defined
     with_dict: "{{ _eos_facts.ansible_facts.ansible_net_interfaces }}"
 
 
