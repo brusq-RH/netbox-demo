@@ -37,6 +37,12 @@
 
 
   - debug:
+      msg: "{{ item.value.duplex }}" 
+      verbosity: 2
+    with_dict: "{{ _eos_facts.ansible_facts.ansible_net_interfaces }}"
+
+
+  - debug:
       msg: "{% if item.value.duplex == 'duplexFull' %}Full{% else %}UNKNOWN{% endif %}" 
       verbosity: 2
     with_dict: "{{ _eos_facts.ansible_facts.ansible_net_interfaces }}"
