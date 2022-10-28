@@ -5,7 +5,7 @@
   gather_facts: false
 
   vars:
-    input:  "{{ data | from_yaml  }}" 
+    input:  "{{ data | dict2items  }}" 
 
   tasks:
     - include_vars: main.yml
@@ -22,7 +22,7 @@
 
     - name: Debug Netbox data structure
       debug:
-        msg: "{{ var }}" 
+        msg: "{{ input }}" 
 
     - name: Debug Netbox data structure JSON
       debug:
