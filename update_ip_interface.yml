@@ -15,7 +15,7 @@
 
     - name: set fact
       set_fact:
-        netbox_interface:  "{{ query('netbox.netbox.nb_lookup', 'api_filter='id={{ interface_id }}',
+        netbox_interface:  "{{ query('netbox.netbox.nb_lookup', 'interfaces', api_filter='id={{ interface_id }}',
                       api_endpoint='http://192.168.1.200/',
                       token='db59d5f08ff66721c64bd181e2b23da2e48d2d87', validate_certs=false) }}"
     - name: debug
