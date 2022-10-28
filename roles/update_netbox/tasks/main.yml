@@ -1,10 +1,10 @@
 ---
 
-- name: Parse facts 
-  include_tasks: "parse_facts_{{ ansible_network_os }}.yml"
+#- name: Parse facts 
+#  include_tasks: "parse_facts_{{ ansible_network_os }}.yml"
 
 - name: Parse Interfaces 
   include_tasks: "parse_intf.yml"
 
-- name: Parse Vlans 
-  include_tasks: "parse_vlans_{{ ansible_network_os }}.yml"
+#- name: Parse Vlans 
+#  include_tasks: "parse_vlans_{{ ansible_network_os }}.yml"

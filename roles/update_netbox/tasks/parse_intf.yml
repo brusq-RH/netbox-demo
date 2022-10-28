@@ -30,6 +30,24 @@
 
 - name: NETBOX BLOCK
   block:
+  # - name: push interface data to netbox
+  #   netbox.netbox.netbox_device_interface:
+  #     netbox_url: "{{ net_netbox_url }}"
+  #     netbox_token: "{{ net_netbox_token }}"
+  #     validate_certs: no
+  #     data:
+  #       device: "{{ inventory_hostname }}"
+  #       name: "{{ item.interface }}"
+  #       description: "{{ item.description | default(omit) }}"
+  #       mac_address: "{{ item.address | default('00:00:00:00:00:00', true) | ansible.utils.hwaddr('linux') }}"
+  #       type: "Virtual"
+  #       enabled: "{{ item.enabled | default(omit) }}"
+  #       mtu: "{{ item.mtu | default(omit) }}"
+  #   loop: "{{ _int_result.parsed }}"
+  #   loop_control:
+  #     label: "{{ item.interface }}"
+
+
   - name: push interface data to netbox
     netbox.netbox.netbox_device_interface:
       netbox_url: "{{ net_netbox_url }}"
@@ -37,15 +55,15 @@
       validate_certs: no
       data:
         device: "{{ inventory_hostname }}"
-        name: "{{ item.interface }}"
+        name: "{{ item.key }}"
         description: "{{ item.description | default(omit) }}"
-        mac_address: "{{ item.address | default('00:00:00:00:00:00', true) | ansible.utils.hwaddr('linux') }}"
+        mac_address: "{{ item.macaddress | default('00:00:00:00:00:00', true) | ansible.utils.hwaddr('linux') }}"
         type: "Virtual"
         enabled: "{{ item.enabled | default(omit) }}"
         mtu: "{{ item.mtu | default(omit) }}"
-    loop: "{{ _int_result.parsed }}"
-    loop_control:
-      label: "{{ item.interface }}"
+    with_items: "{{ _eos_facts.ansible_net_interfaces }}"
+
+
   - name: push IP addresses to device interfaces
     netbox.netbox.netbox_ip_address:
       netbox_url: "{{ net_netbox_url }}"
