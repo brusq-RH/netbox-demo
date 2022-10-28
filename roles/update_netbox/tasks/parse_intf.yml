@@ -31,7 +31,7 @@
     with_dict: "{{ _eos_facts.ansible_facts.ansible_net_interfaces }}"
 
   - debug:
-      var: item.value
+      var: item.value.mtu
       verbosity: 2
     with_dict: "{{ _eos_facts.ansible_facts.ansible_net_interfaces }}"
 
