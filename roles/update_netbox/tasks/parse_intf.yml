@@ -13,6 +13,25 @@
       verbosity: 2
   tags: [parse_intf]
 
+
+
+  - name: EOS facts
+    arista.eos.eos_facts:
+      gather_subset:
+        - l3_interfaces
+        - l2_interfaces
+      gather_network_resources:
+        - all
+    register: _eos_facts
+    become: true
+  - debug:
+      var: _eos_facts
+      verbosity: 2
+  - set_fact:
+      _facts: "{{ _eos_facts }}"
+  when: ansible_network_os == 'eos'
+  tags: [facts, inventory]
+
 - name: NETBOX BLOCK
   block:
   - name: push interface data to netbox
