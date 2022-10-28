@@ -22,7 +22,9 @@
       debug:
         msg: "{{ netbox_interface }}"
 
-
+    - name: debug
+      debug:
+        msg:  "{{ netbox_interface[0].mtu }}, {{ netbox_interface[0].enabled }}, {{ netbox_interface[0].name }}"
 
     - name: Merge provided configuration with device configuration
       cisco.ios.ios_interfaces:
