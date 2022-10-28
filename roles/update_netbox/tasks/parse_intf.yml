@@ -26,12 +26,12 @@
 
 
   - debug:
-      var: item.key
+      var: item
       verbosity: 2
     with_items: "{{ _eos_facts.ansible_facts.ansible_net_interfaces }}"
 
   - debug:
-      var: item.value
+      var: item.mtu
       verbosity: 2
     with_items: "{{ _eos_facts.ansible_facts.ansible_net_interfaces }}"
 
