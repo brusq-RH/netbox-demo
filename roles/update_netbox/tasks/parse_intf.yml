@@ -31,15 +31,16 @@
     with_dict: "{{ _eos_facts.ansible_facts.ansible_net_interfaces }}"
 
   - debug:
-      msg: "{{ item.value.bandwidth / 1000 }}"
+      msg: "{{ item.value.bandwidth / 1000 | int }}"
       verbosity: 2
     with_dict: "{{ _eos_facts.ansible_facts.ansible_net_interfaces }}"
 
+        manufacturer: "{% if ansible_network_os == 'eos' %}arista{% else %}cisco{% endif %}"
 
 
 
   - debug:
-      var: item.value.duplex
+      msg: "{% if item.value.duplex == 'duplexFull' %}Full{% else %}UNKNOWN{% endif %}" 
       verbosity: 2
     with_dict: "{{ _eos_facts.ansible_facts.ansible_net_interfaces }}"
 
