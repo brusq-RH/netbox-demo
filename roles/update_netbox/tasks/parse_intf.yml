@@ -41,10 +41,8 @@
   tags: [facts, inventory]
 
 
-  - debug:
-      var: _eos_facts
-      verbosity: 2
-    with_items: "{{ _eos_facts.ansible_facts.ansible_net_interfaces }}"
+
+
 
 - name: NETBOX BLOCK
   block:
