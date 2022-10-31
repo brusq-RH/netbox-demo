@@ -35,18 +35,18 @@
     throttle: 1
     delegate_to: localhost
 
-- name: Create site within NetBox with only required information
-  netbox.netbox.netbox_site:
-    netbox_url: "{{ net_netbox_url }}"
-    netbox_token: "{{ net_netbox_token }}"
-    validate_certs: no
-    data:
-      name: "{{ net_site }}"
-    state: present
-  delegate_to: localhost
-  throttle: 1
+  - name: Create site within NetBox with only required information
+    netbox.netbox.netbox_site:
+      netbox_url: "{{ net_netbox_url }}"
+      netbox_token: "{{ net_netbox_token }}"
+      validate_certs: no
+      data:
+        name: "{{ net_site }}"
+      state: present
+    delegate_to: localhost
+    throttle: 1
 
-  
+
   - name: push device inventory data to netbox
     netbox.netbox.netbox_device:
       netbox_url: "{{ net_netbox_url }}"
