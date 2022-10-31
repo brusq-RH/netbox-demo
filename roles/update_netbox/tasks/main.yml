@@ -1,7 +1,7 @@
 ---
 
 - name: Create site within NetBox with only required information
-    netbox.netbox.netbox_site:
+  netbox.netbox.netbox_site:
     netbox_url: "{{ net_netbox_url }}"
     netbox_token: "{{ net_netbox_token }}"
     data:
