@@ -60,9 +60,9 @@
       netbox_token: "{{ net_netbox_token }}"
       validate_certs: no
       data:
-        address: "{{ item.ip_address }}"
+        address: "{{ item.ipv4.address }}"
         assigned_object:
-          name: "{{ item.interface }}"
+          name: "{{ item.key }}"
           device: "{{ inventory_hostname }}"
     with_dict: "{{ _eos_facts.ansible_facts.ansible_net_interfaces }}"
   tags: [netbox]
