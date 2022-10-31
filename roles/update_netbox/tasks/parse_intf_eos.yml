@@ -52,6 +52,7 @@
         enabled: "{{ item.enabled | default(omit) }}"
         mtu: "{{ item.mtu | default(omit) }}"
     with_dict: "{{ _eos_facts.ansible_facts.ansible_net_interfaces }}"
+    delegate_to: localhost
 
 
   - name: push IP addresses to device interfaces
@@ -65,5 +66,7 @@
           name: "{{ item.key }}"
           device: "{{ inventory_hostname }}"
     with_dict: "{{ _eos_facts.ansible_facts.ansible_net_interfaces }}"
+    delegate_to: localhost
+
   tags: [netbox]
   
