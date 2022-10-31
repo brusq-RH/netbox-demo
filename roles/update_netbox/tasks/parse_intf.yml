@@ -93,7 +93,7 @@
         enabled: "{{ item.enabled | default(omit) }}"
         mtu: "{{ item.mtu | default(omit) }}"
         speed:  "{{ item.value.bandwidth / 1000 | int }}"
-        duplex: "{% if item.value.duplex == 'duplexFull' %}Full{% else %}UNKNOWN{% endif %}" 
+        duplex: "Full" 
     with_dict: "{{ _eos_facts.ansible_facts.ansible_net_interfaces }}"
 
 
