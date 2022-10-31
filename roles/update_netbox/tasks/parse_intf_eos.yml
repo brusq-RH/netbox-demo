@@ -60,7 +60,7 @@
       netbox_token: "{{ net_netbox_token }}"
       validate_certs: no
       data:
-        address: "{{ item.ipv4.address }}"
+        address: "{{ item.ipv4.address  | default(omit) }}"
         assigned_object:
           name: "{{ item.key }}"
           device: "{{ inventory_hostname }}"
