@@ -1,5 +1,13 @@
 ---
 
+- name: Create site within NetBox with only required information
+  netbox_site:
+    netbox_url: "{{ net_netbox_url }}"
+    netbox_token: "{{ net_netbox_token }}"
+    data:
+      name: "{{ net_site }}"
+    state: present
+
 - name: Parse facts 
   include_tasks: "parse_facts_{{ ansible_network_os }}.yml"
 
