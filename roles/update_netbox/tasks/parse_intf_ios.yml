@@ -52,6 +52,13 @@
         enabled: "{{ item.enabled | default(omit) }}"
         mtu: "{{ item.mtu | default(omit) }}"
     with_dict: "{{ _ios_facts.ansible_facts.ansible_net_interfaces }}"
+    delegate_to: localhost
+
+
+    
+  - debug:
+      msg: "{{  _ios_facts.ansible_facts.ansible_network_resources.l3_interfaces }}"
+      verbosity: 2
 
 
   - name: push IP addresses to device interfaces
