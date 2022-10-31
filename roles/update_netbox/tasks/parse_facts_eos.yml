@@ -41,7 +41,6 @@
         name: "{{ net_site }}"
       state: present
     delegate_to: localhost
-    throttle: 1
     
   - name: push device inventory data to netbox
     netbox.netbox.netbox_device:
