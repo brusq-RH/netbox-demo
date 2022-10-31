@@ -1,0 +1,72 @@
+---
+
+- name: CAPTURE INTERFACE BLOCK
+  block:
+  - name: IOS facts
+    cisco.ios.ios_facts:
+      gather_subset:
+        - all
+      gather_network_resources:
+        - l3_interfaces
+    register: _ios_facts
+    become: true
+    
+  - debug:
+      var: item
+      verbosity: 2
+    with_dict: "{{ _ios_facts.ansible_facts.ansible_net_interfaces }}"
+
+
+
+- name: NETBOX BLOCK
+  block:
+  # - name: push interface data to netbox
+  #   netbox.netbox.netbox_device_interface:
+  #     netbox_url: "{{ net_netbox_url }}"
+  #     netbox_token: "{{ net_netbox_token }}"
+  #     validate_certs: no
+  #     data:
+  #       device: "{{ inventory_hostname }}"
+  #       name: "{{ item.interface }}"
+  #       description: "{{ item.description | default(omit) }}"
+  #       mac_address: "{{ item.address | default('00:00:00:00:00:00', true) | ansible.utils.hwaddr('linux') }}"
+  #       type: "Virtual"
+  #       enabled: "{{ item.enabled | default(omit) }}"
+  #       mtu: "{{ item.mtu | default(omit) }}"
+  #   loop: "{{ _int_result.parsed }}"
+  #   loop_control:
+  #     label: "{{ item.interface }}"
+
+
+  - name: push interface data to netbox
+    netbox.netbox.netbox_device_interface:
+      netbox_url: "{{ net_netbox_url }}"
+      netbox_token: "{{ net_netbox_token }}"
+      validate_certs: no
+      data:
+        device: "{{ inventory_hostname }}"
+        name: "{{ item.key }}"
+        description: "{{ item.description | default(omit) }}"
+        mac_address: "{{ item.macaddress | default('00:00:00:00:00:00', true) | ansible.utils.hwaddr('linux') }}"
+        type: "Virtual"
+        enabled: "{{ item.enabled | default(omit) }}"
+        mtu: "{{ item.mtu | default(omit) }}"
+    with_dict: "{{ _ios_facts.ansible_facts.ansible_net_interfaces }}"
+
+
+  - name: push IP addresses to device interfaces
+    netbox.netbox.netbox_ip_address:
+      netbox_url: "{{ net_netbox_url }}"
+      netbox_token: "{{ net_netbox_token }}"
+      validate_certs: no
+      data:
+        address: "{{ item.ip_address }}"
+        assigned_object:
+          name: "{{ item.interface }}"
+          device: "{{ inventory_hostname }}"
+    loop: "{{ _int_result.parsed }}"
+    loop_control:
+      label: "{{ item.interface }} ==> {{ item.ip_address }}"
+    when: item.ip_address != ""
+  tags: [netbox]
+  

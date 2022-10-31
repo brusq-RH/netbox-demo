@@ -1,0 +1,3 @@
+---
+  - debug:
+      msg: "Not a switch / level 2 router "
