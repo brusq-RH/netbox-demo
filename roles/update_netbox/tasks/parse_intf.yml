@@ -92,7 +92,7 @@
         type: "Virtual"
         enabled: "{{ item.enabled | default(omit) }}"
         mtu: "{{ item.mtu | default(omit) }}"
-    with_dicts: "{{ _eos_facts.ansible_facts.ansible_net_interfaces }}"
+    with_dict: "{{ _eos_facts.ansible_facts.ansible_net_interfaces }}"
 
 
   - name: push IP addresses to device interfaces
