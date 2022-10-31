@@ -69,7 +69,7 @@
         description: "{{ item.ipv4[0].address }} description"
       state: present
     loop: "{{ _eos_facts.ansible_facts.ansible_network_resources.l3_interfaces }}"
-    when: item.ipv4 is defined and item.ipv4[0].address != ""
+    when: item.ipv4 is defined and item.ipv4[0].address != "" and item.ipv4[0].address != "dhcp"
     throttle: 1
     delegate_to: localhost
 
