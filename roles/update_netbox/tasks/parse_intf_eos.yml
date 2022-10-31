@@ -64,9 +64,7 @@
         assigned_object:
           name: "{{ item.interface }}"
           device: "{{ inventory_hostname }}"
-    loop: "{{ _int_result.parsed }}"
-    loop_control:
-      label: "{{ item.interface }} ==> {{ item.ip_address }}"
     when: item.ip_address != ""
+    with_dict: "{{ _eos_facts.ansible_facts.ansible_net_interfaces }}"
   tags: [netbox]
   
