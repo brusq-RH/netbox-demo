@@ -66,5 +66,7 @@
           device: "{{ inventory_hostname }}"
     loop: "{{ _ios_facts.ansible_facts.ansible_network_resources.l3_interfaces }}"
     when: item.ipv4 is defined and item.ipv4[0].address != "" and item.ipv4[0].address != "dhcp"
+    delegate_to: localhost
+
   tags: [netbox]
   
