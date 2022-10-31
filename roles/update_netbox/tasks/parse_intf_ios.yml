@@ -64,9 +64,7 @@
         assigned_object:
           name: "{{ item.interface }}"
           device: "{{ inventory_hostname }}"
-    loop: "{{ _int_result.parsed }}"
-    loop_control:
-      label: "{{ item.interface }} ==> {{ item.ip_address }}"
-    when: item.ip_address != ""
+    loop: "{{ _ios_facts.ansible_facts.ansible_network_resources.l3_interfaces }}"
+    when: item.ipv4 is defined and item.ipv4[0].address != "" and item.ipv4[0].address != "dhcp"
   tags: [netbox]
   
