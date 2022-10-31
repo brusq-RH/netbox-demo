@@ -71,6 +71,7 @@
     loop: "{{ _facts.ansible_facts.ansible_network_resources.l3_interfaces }}"
     when: item.ipv4 is defined and item.ipv4[0].address != ""
     throttle: 1
+    delegate_to: localhost
 
   tags: [netbox]
   
