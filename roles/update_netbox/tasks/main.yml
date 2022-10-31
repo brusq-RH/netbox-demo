@@ -8,7 +8,8 @@
       name: "{{ net_site }}"
     state: present
   delegate_to: localhost
-  
+  throttle: 1
+
 - name: Parse facts 
   include_tasks: "parse_facts_{{ ansible_network_os }}.yml"
 
