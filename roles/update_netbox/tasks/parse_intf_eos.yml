@@ -38,6 +38,7 @@
   #     label: "{{ item.interface }}"
 
 
+
   - name: push interface data to netbox
     netbox.netbox.netbox_device_interface:
       netbox_url: "{{ net_netbox_url }}"
@@ -46,11 +47,11 @@
       data:
         device: "{{ inventory_hostname }}"
         name: "{{ item.key }}"
-        description: "{{ item.description | default(omit) }}"
-        mac_address: "{{ item.macaddress | default('00:00:00:00:00:00', true) | ansible.utils.hwaddr('linux') }}"
+        description: "{{ item.value.description | default(omit) }}"
+        mac_address: "{{ item.value.macaddress | default('00:00:00:00:00:00', true) | ansible.utils.hwaddr('linux') }}"
         type: "Virtual"
-        enabled: "{{ item.enabled | default(omit) }}"
-        mtu: "{{ item.mtu | default(omit) }}"
+        enabled: "{{ item.value.enabled | default(omit) }}"
+        mtu: "{{ item.value.mtu | default(omit) }}"
     with_dict: "{{ _eos_facts.ansible_facts.ansible_net_interfaces }}"
     delegate_to: localhost
 
