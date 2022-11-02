@@ -40,7 +40,19 @@
       arista.eos.eos_l2_interfaces:
         config:
         - name: "{{ netbox_interface[0].name }}"
-          mode: access
+          mode: "{{ netbox_interface[0].mode.value }}"
           access:
             vlan: "{{ netbox_interface[0].untagged_vlan.vid }}"
         state: replaced
+        when:  netbox_interface[0].untagged_vlan is defined
+
+
+    - name: Merge provided configuration with device configuration.
+      arista.eos.eos_l2_interfaces:
+        config:
+        - name: "{{ netbox_interface[0].name }}"
+          mode: "{{ netbox_interface[0].mode.value }}"
+          access:
+            vlan: "{{ netbox_interface[0].untagged_vlan.vid }}"
+        state: replaced
+        when:  netbox_interface[0].tagged_vlan is defined
