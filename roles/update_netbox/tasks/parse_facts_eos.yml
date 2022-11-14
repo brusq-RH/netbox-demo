@@ -12,7 +12,6 @@
     become: true
   - debug:
       var: _eos_facts
-      verbosity: 2
   - set_fact:
       _facts: "{{ _eos_facts }}"
   when: ansible_network_os == 'eos'

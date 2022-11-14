@@ -17,7 +17,6 @@
     become: true
   - debug:
       var: _ios_facts
-      verbosity: 2
   - set_fact:
       _facts: "{{ _ios_facts }}"
   when: ansible_network_os == 'ios'
