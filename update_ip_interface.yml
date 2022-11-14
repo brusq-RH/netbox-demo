@@ -44,4 +44,4 @@
           access:
             vlan: "{{ netbox_interface[0].untagged_vlan.vid }}"
         state: replaced
-      when:  (netbox_interface[0].untagged_vlan is defined) and (netbox_interface[0].untagged_vlan != 'null')
+      when:  (netbox_interface[0].untagged_vlan is defined) and (netbox_interface[0].untagged_vlan is not none)
