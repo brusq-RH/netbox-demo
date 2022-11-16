@@ -8,25 +8,24 @@
   tasks:
     - include_vars: main.yml
 
-    - name: Debug Netbox data structure
+    - name: Debug Interface ID
       debug:
-        msg: "{{ interface_id }}" 
+        msg: "Updating interface ID : {{ interface_id }}  " 
 
 
-    - name: set fact
+    - name: Get interface parameters
       set_fact:
         netbox_interface:  "{{ query('netbox.netbox.nb_lookup', 'interfaces', api_filter='id=' ~ interface_id,
                       api_endpoint='http://192.168.1.200/',
                       token='db59d5f08ff66721c64bd181e2b23da2e48d2d87', validate_certs=false) }}"
-    - name: debug
+                      
+    - name: Display interface parameters
       debug:
         msg: "{{ netbox_interface }}"
 
-    - name: debug
-      debug:
-        msg:  "{{ netbox_interface[0].mtu }}, {{ netbox_interface[0].enabled }}, {{ netbox_interface[0].name }}"
+   
 
-    - name: Merge provided configuration with device configuration
+    - name: Merge Interfaces provided configuration with device configuration
       arista.eos.eos_interfaces:
         config:
         - name: "{{ netbox_interface[0].name }}"
@@ -36,7 +35,7 @@
           enabled: true
 
 
-    - name: Merge provided configuration with device configuration.
+    - name: Merge Vlans provided configuration with device configuration.
       arista.eos.eos_l2_interfaces:
         config:
         - name: "{{ netbox_interface[0].name }}"
